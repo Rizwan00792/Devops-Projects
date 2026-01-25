@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    
+    parameters {
+           choice(name: 'ENV', choices: ['Dev','QA','Prod'], description: 'environment')
+               }
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    if (params.ENV=='Dev'){
+                    sh 'echo Dev'
+                    }
+                    else if (params.ENV=='QA'){
+                    sh 'echo QA'
+                    }
+                    else (params.ENV=='Prod'){
+                    sh 'echo Prod'
+                    }
+            }
+            }
+        }
+           }
+    
+}
